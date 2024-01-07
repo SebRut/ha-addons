@@ -1,0 +1,3 @@
+[submodule "teddycloud/teddycloud"]
+	path = teddycloud/teddycloud
+	url = https://github.com/toniebox-reverse-engineering/teddycloud.git
