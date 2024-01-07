@@ -4,7 +4,7 @@ set -o pipefail
 set -o nounset
 
 # config
-SHARE_DIR=/addon_config
+SHARE_DIR=/config
 
 # ha config dirs
 echo "creating config dirs"
