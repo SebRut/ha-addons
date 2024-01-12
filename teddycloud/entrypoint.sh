@@ -5,28 +5,21 @@ set -o nounset
 
 # config
 SHARE_DIR=/config
+declare -a DIRS=(certs config data/content data/library data/firmware)
 
 # ha config dirs
 echo "creating config dirs"
-mkdir -p "$SHARE_DIR/certs"
-mkdir -p "$SHARE_DIR/config"
-mkdir -p "$SHARE_DIR/data"
-mkdir -p "$SHARE_DIR/data/content"
-mkdir -p "$SHARE_DIR/data/library"
-mkdir -p "$SHARE_DIR/data/firmware"
+for dir in "${DIRS[@]}"; do
+    mkdir --parents --verbose "$$SHARE_DIR/$dir"
+done
 
 # ha config symlinks
 echo "creating /teddycloud symlinks"
 
-#ln -sF /teddycloud/config /config/config
-rm -rf /teddycloud/certs/
-ln -sF "$SHARE_DIR/certs" /teddycloud/certs
-
-rm -rf /teddycloud/config/
-ln -sF "$SHARE_DIR/config" /teddycloud/config
-
-rm -rf /teddycloud/data
-ln -sF "$SHARE_DIR/data" /teddycloud/data
+for dir in "${DIRS[@]}"; do
+    rm --recursive --force --verbose "/teddycloud/$dir/"
+    ln --symbolic --directory --verbose "$SHARE_DIR/$dir" "/teddycloud/$dir"
+done
 
 # run default entrypoint
 /docker-entrypoint.sh
