@@ -39,11 +39,6 @@ COPY --from=buildenv \
 
 COPY --from=buildenv /buildenv/install/zip/release.zip /tmp/teddycloud.zip
 
-VOLUME \
-    "/teddycloud/data/content" \
-    "/teddycloud/data/library" \
-    "/teddycloud/data/firmware"
-
 COPY teddycloud/docker/docker-entrypoint.sh /
 RUN chmod +rx /docker-entrypoint.sh
 
