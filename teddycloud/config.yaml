@@ -3,12 +3,13 @@ description: "local alternative api for toniebox"
 version: "0.3.4-4"
 slug: "teddycloud"
 webui: "https://[HOST]:[PORT:443]"
+watchdog: "https://[HOST]:[PORT:443]"
 arch:
   - amd64
   - armv7
   - aarch64
 ports:
-  80/tcp: 12345
+  80/tcp: null
   443/tcp: 443
 map:
   - addon_config:rw
