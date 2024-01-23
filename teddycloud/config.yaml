@@ -1,6 +1,6 @@
 name: "TeddyCloud"
 description: "local alternative api for toniebox"
-version: "0.3.4-5"
+version: "0.3.5-1"
 slug: "teddycloud"
 stage: experimental
 webui: "https://[HOST]:[PORT:443]"
