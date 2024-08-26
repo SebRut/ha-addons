@@ -7,6 +7,7 @@ read --prompt "echo 'target teddycloud version: ' " -l target_tc_version
 cd $teddycloud_dir
 git fetch --quiet
 git checkout --quiet tc_v$target_tc_version
+git submodule init
 git submodule update --recursive --quiet
 cd ..
 

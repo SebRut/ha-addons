@@ -7,7 +7,8 @@ RUN apt-get update \
 COPY ./teddycloud /buildenv
 WORKDIR /buildenv
 
-RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonies.json -o /buildenv/install/pre/config/tonies.json || true
+RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonies.json -o /buildenv/contrib/config/tonies.json || true
+RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true
 RUN make zip
 
 FROM ubuntu:latest
@@ -24,7 +25,8 @@ RUN mkdir -p /teddycloud/certs \
     && mkdir -p /teddycloud/data/content/default \
     && mkdir -p /teddycloud/data/library \
     && mkdir -p /teddycloud/data/firmware  \
-    && mkdir -p /teddycloud/data/www   \
+    && mkdir -p /teddycloud/data/www \
+    && mkdir -p /teddycloud/data/cache \
     && mkdir -p /tmp
 
 COPY --from=buildenv \
