@@ -1,17 +1,19 @@
 # copied from teddycloud
-FROM ubuntu:latest as buildenv
+FROM ubuntu:22.04 as buildenv
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl
+    && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl ca-certificates
 
-COPY ./teddycloud /buildenv
+RUN update-ca-certificates
+
+RUN git clone --depth 1 --recursive --branch tc_v0.6.2 https://github.com/toniebox-reverse-engineering/teddycloud.git buildenv/
+
 WORKDIR /buildenv
-
 RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonies.json -o /buildenv/contrib/config/tonies.json || true
 RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true
 RUN make zip
 
-FROM ubuntu:latest
+FROM ubuntu:24.04
 EXPOSE 80 443 8443
 
 RUN apt-get update \
@@ -41,7 +43,7 @@ COPY --from=buildenv \
 
 COPY --from=buildenv /buildenv/install/zip/release.zip /tmp/teddycloud.zip
 
-COPY teddycloud/docker/docker-entrypoint.sh /
+COPY --from=buildenv /buildenv/docker/docker-entrypoint.sh /
 RUN chmod +rx /docker-entrypoint.sh
 
 # custom start
