@@ -12,7 +12,7 @@ RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonie
 RUN make zip
 
 FROM ubuntu:latest
-EXPOSE 80 443
+EXPOSE 80 443 8443
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends libubsan1 ffmpeg curl ca-certificates \
