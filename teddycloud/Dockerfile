@@ -6,7 +6,7 @@ RUN apt-get update \
 
 RUN update-ca-certificates
 
-RUN git clone --depth 1 --recursive --branch tc_v0.6.3 https://github.com/toniebox-reverse-engineering/teddycloud.git buildenv/
+RUN git clone --depth 1 --recursive --branch tc_v0.6.4 https://github.com/toniebox-reverse-engineering/teddycloud.git buildenv/
 
 WORKDIR /buildenv
 RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonies.json -o /buildenv/contrib/config/tonies.json || true
