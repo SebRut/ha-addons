@@ -1,5 +1,5 @@
 # copied from teddycloud
-FROM ubuntu:22.04 AS buildenv
+FROM ubuntu:latest AS buildenv
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl ca-certificates
@@ -13,7 +13,7 @@ RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonie
 RUN curl -f https://raw.githubusercontent.com/toniebox-reverse-engineering/tonies-json/release/tonieboxes.json -o /buildenv/contrib/config/tonieboxes.json || true
 RUN make zip
 
-FROM ubuntu:24.04
+FROM ubuntu:latest
 EXPOSE 80 443 8443
 
 RUN apt-get update \
