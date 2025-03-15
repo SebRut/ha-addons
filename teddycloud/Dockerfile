@@ -1,5 +1,5 @@
 # copied from teddycloud
-FROM ubuntu:22.04 as buildenv
+FROM ubuntu:22.04 AS buildenv
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc protobuf-c-compiler build-essential git zip curl ca-certificates
@@ -17,7 +17,7 @@ FROM ubuntu:24.04
 EXPOSE 80 443 8443
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libubsan1 ffmpeg curl ca-certificates \
+    && apt-get install -y --no-install-recommends libubsan1 strace ffmpeg curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 RUN update-ca-certificates
